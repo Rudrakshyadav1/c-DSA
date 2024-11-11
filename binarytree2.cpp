@@ -38,7 +38,7 @@ void inordertraversal(node* root) {
     inordertraversal(root->right);  
 }
 
-int main() {
+int main(){
     node* root = nullptr;
     root = BuiltBinaryTree(root);  
     cout << "In-order traversal of the binary tree:\n";
