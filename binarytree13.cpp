@@ -1,7 +1,7 @@
 #include<iostream>
 #include<queue>
 #include<map>
-#include<utility> 
+#include<utility>
 using namespace std;
 
 class node {
@@ -14,7 +14,6 @@ public:
         left = right = nullptr;
     }
 };
-
 node* BuiltBinaryTree(node* root) {
     int data;
     cout << "Enter data to be inserted (or -1 to stop): ";
@@ -30,31 +29,29 @@ node* BuiltBinaryTree(node* root) {
     root->right = BuiltBinaryTree(root->right); 
     return root; 
 }
-void topviewtraversal(node* root){
+void BottomView(node* root) {
     if (root == nullptr) {
         return;
     }
-    queue<pair<node*, int>> q;
-    map<int, int> topmap;  
-    q.push({root, 0});
-
+    map<int, int> bottomMap; 
+    queue<pair<node*, int>> q; 
+    q.push(make_pair(root, 0));
     while (!q.empty()) {
         auto current = q.front();
         q.pop();
         node* currentNode = current.first;
         int hd = current.second; 
-        if (topmap.find(hd) == topmap.end()){
-            topmap[hd] = currentNode->data;
-        }
+        bottomMap[hd] = currentNode->data; 
         if (currentNode->left) {
-            q.push({currentNode->left, hd - 1});
+            q.push(make_pair(currentNode->left, hd - 1));
         }
         if (currentNode->right) {
-            q.push({currentNode->right, hd + 1});
+            q.push(make_pair(currentNode->right, hd + 1));
         }
     }
-    for (auto i : topmap) {
-        cout << i.second << " ";  
+    cout << "Bottom view of the binary tree: ";
+    for (const auto& i : bottomMap) {
+        cout << i.second << " ";
     }
     cout << endl;
 }
@@ -62,7 +59,7 @@ void topviewtraversal(node* root){
 int main() {
     node* root = nullptr;
     root = BuiltBinaryTree(root);
-    cout << "Top view of the binary tree: ";
-    topviewtraversal(root);
+    BottomView(root);
+
     return 0;
 }
