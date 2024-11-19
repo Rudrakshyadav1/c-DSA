@@ -60,6 +60,5 @@ int main() {
     node* root = nullptr;
     root = BuiltBinaryTree(root);
     BottomView(root);
-
     return 0;
 }
