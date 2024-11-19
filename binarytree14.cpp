@@ -27,7 +27,6 @@ void BinaryTreeConstructor(node*& root){
     BinaryTreeConstructor(root->right);
     cout << "\n";
 }
-
 void solver(int len, int sum, int& maxlen, int& maxsum, node* root){
     if (root == nullptr) {
         if(len > maxlen){
