@@ -32,42 +32,33 @@ node* BinaryTreeConstructor(node* root) {
     return root;
 }
 
-void buildParentMapping(node* root, unordered_map<node*, node*>& parentMap) {
+void buildParentMapping(node* root, unordered_map<node*, node*>& parentMap, node*& targetNode, int target) {
     if (root == nullptr) {
         return;
     }
+    if (root->data == target) {
+        targetNode = root;
+    }
     if (root->left) {
         parentMap[root->left] = root;
-        buildParentMapping(root->left, parentMap);
+        buildParentMapping(root->left, parentMap, targetNode, target);
     }
     if (root->right) {
         parentMap[root->right] = root;
-        buildParentMapping(root->right, parentMap);
+        buildParentMapping(root->right, parentMap, targetNode, target);
     }
 }
 int burnBinaryTree(node* root, int target) {
     unordered_map<node*, node*> parentMap;
     unordered_map<node*, bool> visited; 
     node* targetNode = nullptr;
-    queue<node*> q;
-    buildParentMapping(root, parentMap);
-    bool targetFound = false;
-    q.push(root);
-    while (!q.empty() && !targetFound) {
-        node* current = q.front();
-        q.pop();
-        if (current->data == target) {
-            targetNode = current;
-            targetFound = true;
-        }
-        if (current->left) q.push(current->left);
-        if (current->right) q.push(current->right);
-    }
-
+    buildParentMapping(root, parentMap, targetNode, target);
+    
     if (!targetNode) {
         cout << "Target node not found in the tree.\n";
         return -1;
     }
+    queue<node*> q;
     q.push(targetNode);
     visited[targetNode] = true;
     int time = 0;
@@ -75,7 +66,8 @@ int burnBinaryTree(node* root, int target) {
     while (!q.empty()) {
         int size = q.size();
         bool fireSpread = false;
-        for (int i = 0; i < size;i++) {
+
+        for (int i = 0; i < size; i++) {
             node* currentNode = q.front();
             q.pop();
             if (currentNode->left && !visited[currentNode->left]) {
@@ -88,14 +80,13 @@ int burnBinaryTree(node* root, int target) {
                 q.push(currentNode->right);
                 fireSpread = true;
             }
-            if (parentMap.find(currentNode) != parentMap.end() &&
-                !visited[parentMap[currentNode]]) {
+            if (parentMap.find(currentNode) != parentMap.end() && !visited[parentMap[currentNode]]) {
                 visited[parentMap[currentNode]] = true;
                 q.push(parentMap[currentNode]);
                 fireSpread = true;
             }
         }
-        if (fireSpread){
+        if (fireSpread) {
             time++;
         }
     }
@@ -106,11 +97,9 @@ int burnBinaryTree(node* root, int target) {
 int main() {
     node* root = nullptr;
     root = BinaryTreeConstructor(root);
-
     cout << "Enter the target element: ";
     int target;
     cin >> target;
-
     int result = burnBinaryTree(root, target);
     if (result != -1) {
         cout << "Minimum time to burn the entire tree: " << result << " seconds." << endl;
