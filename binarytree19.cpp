@@ -45,17 +45,12 @@ void buildParentMapping(node* root, unordered_map<node*, node*>& parentMap) {
         buildParentMapping(root->right, parentMap);
     }
 }
-
 int burnBinaryTree(node* root, int target) {
     unordered_map<node*, node*> parentMap;
-    unordered_map<node*, bool> visited;  // Keep track of visited nodes
+    unordered_map<node*, bool> visited; 
     node* targetNode = nullptr;
-
-    // First, find the target node and create the parent map
     queue<node*> q;
     buildParentMapping(root, parentMap);
-
-    // Find the target node by traversing the tree manually
     bool targetFound = false;
     q.push(root);
     while (!q.empty() && !targetFound) {
@@ -73,8 +68,6 @@ int burnBinaryTree(node* root, int target) {
         cout << "Target node not found in the tree.\n";
         return -1;
     }
-
-    // Start BFS from the target node
     q.push(targetNode);
     visited[targetNode] = true;
     int time = 0;
