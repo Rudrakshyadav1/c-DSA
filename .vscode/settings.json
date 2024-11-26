@@ -5,6 +5,7 @@
         "queue": "cpp",
         "iostream": "cpp",
         "ios": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "__locale": "cpp"
     }
 }
