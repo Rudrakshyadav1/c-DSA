@@ -1,11 +1,16 @@
 {
     "files.associations": {
+        "*.sqlbook": "sql",
+        "*.ndjson": "jsonl",
+        "*.dbclient-js": "javascript",
         "stack": "cpp",
         "vector": "cpp",
         "queue": "cpp",
         "iostream": "cpp",
         "ios": "cpp",
         "ostream": "cpp",
-        "__locale": "cpp"
+        "__locale": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp"
     }
 }
