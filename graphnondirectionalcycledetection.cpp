@@ -18,7 +18,6 @@ public:
             int node = tracker.front().first;
             int parent = tracker.front().second;
             tracker.pop();
-
             for (auto it : adj[node]){
                 if (isvisited[it] && it != parent){
                     ans = true;
