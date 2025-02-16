@@ -21,12 +21,10 @@ public:
         queue<int> q; 
         q.push(start);   
         visited[start] = true;
-        
         while(!q.empty()){
             int node = q.front();
             q.pop();
             cout << node << " "; 
-            
             for(int neighbor: adj[node]){
                 if(!visited[neighbor]){
                     q.push(neighbor);
@@ -36,7 +34,6 @@ public:
         }
         cout << endl;
     }
-
     void dfs(int start, unordered_map<int, bool>& visited){
         visited[start] = true;
         cout << start << " "; 
