@@ -19,11 +19,11 @@ public:
             int parent = tracker.front().second;
             tracker.pop();
             for (auto it : adj[node]){
-                if (isvisited[it] && it != parent){
+                if(isvisited[it] && it != parent){
                     ans = true;
                     return;
                 }
-                if (!isvisited[it]){
+                if(!isvisited[it]){
                     tracker.push({it, node});
                     isvisited[it] = true;
                 }
