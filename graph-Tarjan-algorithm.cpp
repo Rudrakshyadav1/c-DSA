@@ -52,11 +52,11 @@ int main() {
             g.bridgefinder(i, -1);
         }
     }
-    if(g.ans.empty()) {
+    if(g.ans.empty()){
         cout << "No bridges found." << endl;
     }
     else{
-        for (auto it : g.ans) {
+        for (auto it : g.ans){
             cout << "[" << it.first << ", " << it.second << "]" << endl;
         }
     }
